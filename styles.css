@@ -1,0 +1,253 @@
+:root {
+  --pink-50: #fff5f8;
+  --pink-100: #ffe9f0;
+  --pink-200: #ffd5e3;
+  --pink-400: #ff7cab;
+  --pink-500: #ff5f98;
+  --pink-600: #ff3f85;
+  --rose-500: #ff4b6e;
+  --red-500: #ff335c;
+  --white: #ffffff;
+  --text: #7a2042;
+  --shadow: 0 12px 30px rgba(255, 76, 126, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 164, 196, 0.35), transparent 40%),
+    radial-gradient(circle at 85% 25%, rgba(255, 130, 175, 0.32), transparent 38%),
+    linear-gradient(145deg, var(--pink-50), var(--pink-100));
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  position: relative;
+  touch-action: manipulation;
+}
+
+.sparkle {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.25;
+  background-image:
+    radial-gradient(circle at 20% 30%, #fff 0 2px, transparent 3px),
+    radial-gradient(circle at 75% 20%, #fff 0 2px, transparent 3px),
+    radial-gradient(circle at 65% 75%, #fff 0 2px, transparent 3px),
+    radial-gradient(circle at 35% 80%, #fff 0 2px, transparent 3px);
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+.app {
+  width: min(94vw, 620px);
+  text-align: center;
+  padding: 28px 18px 18px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 900ms ease both;
+}
+
+.heart-wrap {
+  width: 120px;
+  height: 110px;
+  margin: 8px auto 14px;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.heart {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(145deg, var(--rose-500), var(--red-500));
+  transform: rotate(-45deg);
+  border-radius: 12px;
+  position: relative;
+  animation: heartbeat 1.1s ease-in-out infinite;
+  box-shadow: 0 8px 22px rgba(255, 69, 118, 0.45);
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(145deg, var(--rose-500), var(--red-500));
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -36px;
+  left: 0;
+}
+
+.heart::after {
+  top: 0;
+  left: 36px;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Baloo 2", cursive;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3.6vw, 2.25rem);
+  line-height: 1.2;
+  color: #842044;
+  letter-spacing: 0.2px;
+  transition: transform 300ms ease;
+}
+
+.btn-zone {
+  width: min(92vw, 450px);
+  height: 170px;
+  margin: 18px auto 6px;
+  position: relative;
+}
+
+.btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: clamp(1rem, 3.2vw, 1.1rem);
+  font-weight: 700;
+  font-family: "Baloo 2", cursive;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+#yesBtn {
+  background: linear-gradient(145deg, var(--pink-500), var(--pink-600));
+  color: var(--white);
+  box-shadow: 0 10px 24px rgba(255, 59, 125, 0.35);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#yesBtn:hover {
+  filter: brightness(1.04);
+  box-shadow: 0 14px 30px rgba(255, 59, 125, 0.45);
+}
+
+#noBtn {
+  background: var(--white);
+  color: var(--pink-600);
+  border: 2px solid var(--pink-200);
+  box-shadow: 0 8px 16px rgba(255, 92, 145, 0.2);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 4;
+}
+
+.celebrate .heart-wrap {
+  animation: floaty 1.2s ease-in-out infinite;
+}
+
+.celebrate .heart {
+  animation: partyBeat 680ms ease-in-out infinite;
+  filter: saturate(1.1) brightness(1.08);
+}
+
+.celebrate h1 {
+  animation: popText 520ms ease;
+  color: #8b0035;
+}
+
+.celebrate #yesBtn {
+  animation: yesBounce 600ms ease;
+}
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: rotate(-45deg) scale(1); }
+  15% { transform: rotate(-45deg) scale(1.08); }
+  35% { transform: rotate(-45deg) scale(0.98); }
+  55% { transform: rotate(-45deg) scale(1.06); }
+  75% { transform: rotate(-45deg) scale(1); }
+}
+
+@keyframes partyBeat {
+  0%, 100% { transform: rotate(-45deg) scale(1.02); }
+  40% { transform: rotate(-45deg) scale(1.18); }
+  70% { transform: rotate(-45deg) scale(0.98); }
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-9px); }
+}
+
+@keyframes popText {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.07); }
+  100% { transform: scale(1); }
+}
+
+@keyframes yesBounce {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  35% { transform: translate(-50%, -50%) scale(1.12); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes twinkle {
+  from { opacity: 0.16; }
+  to { opacity: 0.35; }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 520px) {
+  .app {
+    border-radius: 22px;
+    padding: 22px 14px 12px;
+  }
+
+  .btn-zone {
+    height: 160px;
+  }
+
+  .heart-wrap {
+    transform: scale(0.95);
+  }
+}
