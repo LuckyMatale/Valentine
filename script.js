@@ -2,6 +2,7 @@ const body = document.body;
 const app = document.getElementById("app");
 const introOverlay = document.getElementById("introOverlay");
 const countdown = document.getElementById("countdown");
+const rabbit = document.getElementById("rabbit");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const btnZone = document.getElementById("btnZone");
@@ -14,6 +15,7 @@ let burstParticles = [];
 let confettiAnimating = false;
 let introAnimating = false;
 let yesScale = 1;
+let sadTimeout;
 
 body.classList.add("intro-active");
 
@@ -57,9 +59,23 @@ function moveNoButton() {
 
 function evadeNoButton(event) {
   event.preventDefault();
+  triggerSadRabbit();
   yesScale = Math.min(2.1, yesScale + 0.12);
   yesBtn.style.setProperty("--yes-scale", yesScale.toFixed(2));
   moveNoButton();
+}
+
+function triggerSadRabbit() {
+  if (app.classList.contains("celebrate")) {
+    return;
+  }
+
+  app.classList.remove("rabbit-happy");
+  app.classList.add("rabbit-sad");
+  clearTimeout(sadTimeout);
+  sadTimeout = setTimeout(() => {
+    app.classList.remove("rabbit-sad");
+  }, 900);
 }
 
 function createConfettiPiece() {
@@ -217,6 +233,9 @@ function animateLoveExplosion() {
 }
 
 function celebrateYes() {
+  clearTimeout(sadTimeout);
+  app.classList.remove("rabbit-sad");
+  app.classList.add("rabbit-happy");
   app.classList.add("celebrate");
   question.textContent = "My Forever Valentine 💖✨ LOVE YOU LOTS BABY JAY 🌹";
   yesBtn.textContent = "Forever Us 💞";
@@ -258,6 +277,7 @@ async function runIntroSequence() {
 }
 
 noBtn.addEventListener("click", evadeNoButton);
+noBtn.addEventListener("mouseenter", triggerSadRabbit);
 noBtn.addEventListener("focus", () => {
   noBtn.blur();
 });
