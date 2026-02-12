@@ -237,7 +237,7 @@ function celebrateYes() {
   app.classList.remove("rabbit-sad");
   app.classList.add("rabbit-happy");
   app.classList.add("celebrate");
-  question.textContent = "My Forever Valentine 💖✨ LOVE YOU LOTS BABY JAY 🌹";
+  question.textContent = "My Forever Valentine 💖✨ LOVE YOU LOTS BABY🌹";
   yesBtn.textContent = "Forever Us 💞";
   noBtn.style.display = "none";
   launchConfetti();
